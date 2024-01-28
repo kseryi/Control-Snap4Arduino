@@ -1,2 +1,19 @@
 http://s-team.cc.ua/control/index.html
-this is a control panel that connects to the http server of the Snap4Arduino https://snap4arduino.rocks/ and can control using a gamepad joystick and sliders
+
+I present to you the control panel designed for the HTTP server environment of Snap4Arduino. Currently, only 4 types of controls have been created:
+
+Slider
+
+Gamepad
+
+Joystick 1
+
+Joystick 2
+
+In the project, buttons send network messages, while joysticks and sliders transmit values of respective variables.
+
+Please note that in the Snap4Arduino program, messages and variable names should start with the symbol "+."
+
+To connect the control panel, you need to be on the same local network as the computer running Snap4Arduino. Make sure that the computer is turned on.
+
+To get started, select the type of control. Check if your device is on the same local network as the Snap4Arduino HTTP server (make sure it is turned on). Then enter the corresponding IP address in the field. Verify the transmission of messages or variables.
