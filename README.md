@@ -1,4 +1,5 @@
 http://s-team.cc.ua/control/index.html
+For working with smartphones and tablets, I recommend using the Mozilla Firefox browser.
 
 I present to you the control panel designed for the HTTP server environment of Snap4Arduino. Currently, only 4 types of controls have been created:
 
