@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Слайдери PWM та Servo</title>
+    <style>
+        body {
+            text-align: center;
+            
+        }
+
+       .slider-group {
+			border: 2px solid #3498db;
+			border-radius: 10px;
+			width: 350px;
+			padding: 10px;
+			margin-bottom: 20px;
+			margin: 0 auto; 
+			margin-bottom: 20px;
+}
+
+        .slider-container {
+            margin-bottom: 20px;
+        }
+
+        .slider-label {
+            display: inline-block;
+            text-align: left;
+            width: 60px;
+            margin-right: 10px;
+        }
+
+        .slider-value {
+            display: inline-block;
+            width: 30px;
+        }
+
+       
+        #ipAddressContainer {
+            margin-top: 20px;
+            margin-bottom: 20px;
+    </style>
+</head>
+<body>
+		<div id="ipAddressContainer">
+            <label for="ipAddress">IP Address:</label>
+            <input type="text" id="ipAddress" placeholder="Enter IP Address">
+        </div>
+
+    <div class="slider-group">
+        <h3>PWM</h3>
+        <div class="slider-container">
+            <label class="slider-label" for="pwm1">pwm1:</label>
+            <input type="range" id="pwm1" min="0" max="255" value="0" step="1" oninput="updateSliderValue('pwm', 1, this.value)">
+            <span class="slider-value" id="pwmValue1">0</span>
+        </div>
+
+        <div class="slider-container">
+            <label class="slider-label" for="pwm2">pwm2:</label>
+            <input type="range" id="pwm2" min="0" max="255" value="0" step="1" oninput="updateSliderValue('pwm', 2, this.value)">
+            <span class="slider-value" id="pwmValue2">0</span>
+        </div>
+
+        <div class="slider-container">
+            <label class="slider-label" for="pwm3">pwm3:</label>
+            <input type="range" id="pwm3" min="0" max="255" value="0" step="1" oninput="updateSliderValue('pwm', 3, this.value)">
+            <span class="slider-value" id="pwmValue3">0</span>
+        </div>
+    </div>
+
+    <div class="slider-group">
+        <h3>Servo</h3>
+        <div class="slider-container">
+            <label class="slider-label" for="servo1">servo1:</label>
+            <input type="range" id="servo1" min="0" max="180" value="0" step="1" oninput="updateSliderValue('servo', 1, this.value)">
+            <span class="slider-value" id="servoValue1">0</span>
+        </div>
+
+        <div class="slider-container">
+            <label class="slider-label" for="servo2">servo2:</label>
+            <input type="range" id="servo2" min="0" max="180" value="0" step="1" oninput="updateSliderValue('servo', 2, this.value)">
+            <span class="slider-value" id="servoValue2">0</span>
+        </div>
+
+        <div class="slider-container">
+            <label class="slider-label" for="servo3">servo3:</label>
+            <input type="range" id="servo3" min="0" max="180" value="0" step="1" oninput="updateSliderValue('servo', 3, this.value)">
+            <span class="slider-value" id="servoValue3">0</span>
+        </div>
+    </div>
+   
+
+    <script>
+        function updateSliderValue(type, index, value) {
+            var sliderValueId = type + 'Value' + index;
+            document.getElementById(sliderValueId).innerText = value;
+            
+            var ipAddress = document.getElementById('ipAddress').value;
+            var url = 'http://' + ipAddress + ':42001/vars-update=+' + type + index + '=' + value;
+            fetch(url, { mode: 'no-cors' });
+        }
+    </script>
+</body>
+</html>
