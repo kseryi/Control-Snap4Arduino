@@ -31,3 +31,23 @@ For PWM:
 
 For Servo:
 "+servo1", "+servo2","+servo3"
+
+Gamepad
+
+The gamepad has a classic appearance.
+It has 12 primary buttons that can transmit messages.
+This means that Snap4Arduino can receive 12 different messages depending on which button is pressed.
+
+List of messages: "+L1", "+L2", "+R1", "+R2", "+up", "+down", "+left", "+right", "+square", "+triangle", "+circle", "+cross"
+
+Joystick
+
+Implemented in the form of a game joystick and transmits coordinate values for the variables "+X" and "+Y".
+
+Joystick 2
+
+This is a combination of a joystick and a gamepad.
+
+On the left side is a joystick that transmits values for the variables "+X" and "+Y".
+
+On the right side are buttons that transmit the corresponding messages: "+R1", "+R2", "+square", "+triangle", "+circle", "+cross".
