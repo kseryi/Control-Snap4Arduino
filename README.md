@@ -15,7 +15,7 @@ In the project, buttons send network messages, while joysticks and sliders trans
 
 Please note that in the Snap4Arduino program, messages and variable names should start with the symbol "+."
 
-To connect the control panel, you need to be on the same local network as the computer running Snap4Arduino. Make sure that the computer is turned on.
+To connect the control panel, you need to be on the same local network as the computer running Snap4Arduino. Check if the HTTP server is enabled.
 
 To get started, select the type of control. Check if your device is on the same local network as the Snap4Arduino HTTP server (make sure it is turned on). Then enter the corresponding IP address in the field. Verify the transmission of messages or variables.
 
