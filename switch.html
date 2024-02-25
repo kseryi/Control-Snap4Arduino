@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Слайдери PWM та Servo</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .switch-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 20px; /* Adjust the margin as needed */
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin: 10px 0;
+        }
+
+        .switch input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        #ipAddressContainer {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="ipAddressContainer">
+        <label for="ipAddress">IP Address:</label>
+        <input type="text" id="ipAddress" placeholder="Enter IP Address">
+    </div>
+
+    <div class="switch-container">
+        <div class="column">
+            <label class="switch">
+                <input type="checkbox" id="switch1" onclick="toggleSwitch('switch1')">
+                <span class="slider"></span>
+            </label>
+            <label for="switch1">Switch 1</label>
+            
+            <label class="switch">
+                <input type="checkbox" id="switch4" onclick="toggleSwitch('switch4')">
+                <span class="slider"></span>
+            </label>
+            <label for="switch4">Switch 4</label>
+             <label class="switch">
+                <input type="checkbox" id="switch7" onclick="toggleSwitch('switch7')">
+                <span class="slider"></span>
+            </label>
+            <label for="switch7">Switch 7</label>
+        </div>
+
+        <div class="column">
+            <label class="switch">
+                <input type="checkbox" id="switch2" onclick="toggleSwitch('switch2')">
+                <span class="slider"></span>
+            </label>
+            <label for="switch2">Switch 2</label>
+            
+            <label class="switch">
+                <input type="checkbox" id="switch5" onclick="toggleSwitch('switch5')">
+                <span class="slider"></span>
+            </label>
+            <label for="switch5">Switch 5</label>
+             <label class="switch">
+                <input type="checkbox" id="switch8" onclick="toggleSwitch('switch8')">
+                <span class="slider"></span>
+            </label>
+            <label for="switch8">Switch 8</label>
+        </div>
+        <div class="column">
+            <label class="switch">
+                <input type="checkbox" id="switch3" onclick="toggleSwitch('switch3')">
+                <span class="slider"></span>
+            </label>
+            <label for="switch3">Switch 3</label>
+            
+            <label class="switch">
+                <input type="checkbox" id="switch6" onclick="toggleSwitch('switch6')">
+                <span class="slider"></span>
+            </label>
+            <label for="switch6">Switch 6</label>
+             <label class="switch">
+                <input type="checkbox" id="switch9" onclick="toggleSwitch('switch9')">
+                <span class="slider"></span>
+            </label>
+            <label for="switch9">Switch 9</label>
+        </div>
+    </div>
+
+    <script>
+        function toggleSwitch(switchId) {
+            var switchElement = document.getElementById(switchId);
+            console.log(switchId + ': ' + switchElement.checked);
+
+            var ipAddress = document.getElementById('ipAddress').value;
+            var url = 'http://' + ipAddress + ':42001/vars-update=+' + switchId + '=' + switchElement.checked;
+            fetch(url, { mode: 'no-cors' });
+        }
+    </script>
+</body>
+</html>

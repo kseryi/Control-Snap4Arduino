@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Слайдери PWM та Servo</title>
+    <style>
+        body {
+            text-align: center;
+            
+        }
+
+
+        .slider-container {
+            margin-bottom: 20px;
+        }
+
+        .slider-label {
+            display: inline-block;
+            text-align: left;
+            width: 60px;
+            margin-right: 10px;
+        }
+
+        .slider-value {
+            display: inline-block;
+            width: 30px;
+        }
+        .color-slider{
+			margin-bottom: 20px;
+			}
+       
+       .color-square {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            border: 1px solid #000;
+        }
+
+       
+        #ipAddressContainer {
+            margin-top: 20px;
+            margin-bottom: 20px;
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="ipAddressContainer">
+            <label for="ipAddress">IP Address:</label>
+            <input type="text" id="ipAddress" placeholder="Enter IP Address">
+        </div>
+
+        <div class="slider-container">
+            <div>
+                <div class="color-square" id="colorSquare"></div>
+
+                <label for="redSlider">R:</label>
+                <input class="color-slider" type="range" id="redSlider" min="0" max="255" value="0" step="1" oninput="updateValue('rgb', 'red', this.value)">
+                <div class="slider-value" id="redValue">0</div>
+<br>
+                <label for="greenSlider">G:</label>
+                <input class="color-slider" type="range" id="greenSlider" min="0" max="255" value="0" step="1" oninput="updateValue('rgb', 'green', this.value)">
+                <div class="slider-value" id="greenValue">0</div>
+<br>
+                <label for="blueSlider">B:</label>
+                <input class="color-slider" type="range" id="blueSlider" min="0" max="255" value="0" step="1" oninput="updateValue('rgb', 'blue', this.value)">
+                <div class="slider-value" id="blueValue">0</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateValue(type, channel, value) {
+            document.getElementById(channel + 'Value').innerText = value;
+
+           
+                var redValue = document.getElementById('redSlider').value;
+                var greenValue = document.getElementById('greenSlider').value;
+                var blueValue = document.getElementById('blueSlider').value;
+
+                var colorSquare = document.getElementById('colorSquare');
+                colorSquare.style.backgroundColor = 'rgb(' + redValue + ',' + greenValue + ',' + blueValue + ')';
+                
+                
+           
+                var ipAddress = document.getElementById('ipAddress').value;
+
+                var url = 'http://' + ipAddress + ':42001/vars-update=+' + channel + '=' + value;
+                fetch(url, { mode: 'no-cors' });
+            
+        }
+    </script>
+</body>
+</html>

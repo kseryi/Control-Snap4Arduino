@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Panel</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .room-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .room {
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .switch-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+         .button {
+            position: relative;
+            width: 60px;
+            height: 34px;
+            margin: 0 10px;
+        }
+         .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin: 10px 0;
+        }
+
+        .switch input {
+            display: none;
+        }
+        .switch input {
+            display: none;
+        }
+
+        .slider-container {
+            margin-bottom: 20px;
+        }
+
+        .slider-label {
+            display: inline-block;
+            text-align: left;
+            width: 60px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        .slider-value {
+            display: inline-block;
+            width: 30px;
+            font-size: 16px;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 150px;
+            height: 5px;
+            border-radius: 5px;
+            background-color: #ccc;
+            outline: none;
+            margin: 0 10px;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            cursor: pointer;
+        }
+
+        #ipAddressContainer {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            width: 70px;
+            height: 70px;
+            font-size: 20px; 
+            color: #000; 
+            border: 2px solid #3498db; 
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color:#FFF;
+            user-select: none;
+        }
+
+        .button:active {
+            background-color: #3498db; 
+            color: #fff; 
+        }
+         .slider1 {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider1:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider1 {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider1 {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider1:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body>
+    <div id="ipAddressContainer">
+        <label for="ipAddress">IP Address:</label>
+        <input type="text" id="ipAddress" placeholder="Enter IP Address">
+    </div>
+
+    <div class="room-container">
+        <div class="room">
+            <h3>Room 1</h3>
+            <div class="switch-container">
+                <label class="switch">
+                <input type="checkbox" id="switch1" onclick="toggleSwitch('switch1')">
+                <span class="slider1"></span>
+            </label>
+            <label for="switch">Sw1</label>
+                           
+                            <label class="switch">
+                <input type="checkbox" id="switch2" onclick="toggleSwitch('switch2')">
+                <span class="slider1"></span>
+            </label>
+            <br>
+            <label for="switch">Sw2</label>
+            </div>
+
+            <div class="button-container">
+                <button class="button" onclick="sendCommand('button1')">Butt 1</button>
+                <button class="button" onclick="sendCommand('button2')">Butt 2</button>
+            </div>
+
+            <div class="slider-container">
+                <label class="slider-label" for="slider1">Slider 1:</label>
+                <input type="range" id="slider1" min="0" max="255" value="0" step="1" oninput="updateSliderValue('slider1', this.value)">
+                <span class="slider-value" id="sliderValue1">0</span>
+            </div>
+
+            <div class="slider-container">
+                <label class="slider-label" for="slider2">Slider 2:</label>
+                <input type="range" id="slider2" min="0" max="255" value="0" step="1" oninput="updateSliderValue('slider2', this.value)">
+                <span class="slider-value" id="sliderValue2">0</span>
+            </div>
+        </div>
+
+        <div class="room">
+            <h3>Room 2</h3>
+            <div class="switch-container">
+                <label class="switch">
+                <input type="checkbox" id="switch1" onclick="toggleSwitch('switch1')">
+                <span class="slider1"></span>
+            </label>
+            <label for="switch">Sw3</label>
+                           
+                            <label class="switch">
+                <input type="checkbox" id="switch2" onclick="toggleSwitch('switch2')">
+                <span class="slider1"></span>
+            </label>
+            <br>
+            <label for="switch">Sw4</label>
+            </div>
+
+            <div class="button-container">
+                <button class="button" onclick="sendCommand('button3')">Butt 3</button>
+                <button class="button" onclick="sendCommand('button4')">Butt 4</button>
+            </div>
+
+            <div class="slider-container">
+                <label class="slider-label" for="slider3">Slider 3:</label>
+                <input type="range" id="slider3" min="0" max="255" value="0" step="1" oninput="updateSliderValue('slider3', this.value)">
+                <span class="slider-value" id="sliderValue3">0</span>
+            </div>
+
+            <div class="slider-container">
+                <label class="slider-label" for="slider4">Slider 4:</label>
+                <input type="range" id="slider4" min="0" max="255" value="0" step="1" oninput="updateSliderValue('slider4', this.value)">
+                <span class="slider-value" id="sliderValue4">0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSwitch(switchId) {
+            var switchElement = document.getElementById(switchId);
+            console.log(switchId + ': ' + switchElement.checked);
+
+            var ipAddress = document.getElementById('ipAddress').value;
+            var url = 'http://' + ipAddress + ':42001/vars-update=+' + switchId + '=' + switchElement.checked;
+            fetch(url, { mode: 'no-cors' });
+        }
+
+        function sendCommand(command) {
+            var ipAddress = document.getElementById('ipAddress').value;
+            var url = 'http://' + ipAddress + ':42001/' + command;
+            fetch(url, { mode: 'no-cors' });
+        }
+
+        function updateSliderValue(sliderId, value) {
+            console.log("Slider " + sliderId + " value: " + value);
+
+            var sliderValueElement = document.getElementById('sliderValue' + sliderId.slice(-1));
+            sliderValueElement.innerText = value;
+
+            var ipAddress = document.getElementById('ipAddress').value;
+            // You can adjust the URL according to your requirements
+            var url = 'http://' + ipAddress + ':42001/vars-update=+' + sliderId + '=' + value;
+            fetch(url, { mode: 'no-cors' });
+        }
+    </script>
+</body>
+</html>

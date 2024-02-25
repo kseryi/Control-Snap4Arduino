@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamepad</title>
+    <style>
+        #container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+
+        #ipAddressContainer {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            width: 70px;
+            height: 70px;
+            font-size: 25px;
+            color: #000;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 5px;
+            background-color: #fff;
+            user-select: none;
+        }
+        .buttong {
+            width: 70px;
+            height: 50px;
+            font-size: 25px;
+            color: #000;
+            border: 2px solid #52BE80;
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 5px;
+            background-color: #fff;
+            user-select: none;
+        }
+         .buttonr {
+            width: 70px;
+            height: 50px;
+            font-size: 25px;
+            color: #000;
+            border: 2px solid #FF5733;
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 5px;
+            margin-bottom: 25px;
+            background-color: #fff;
+            user-select: none;
+        }
+                .buttonw {
+            width: 70px;
+            height: 70px;
+            font-size: 25px;
+            color: #fff;
+            border: 2px solid #fff;
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 5px;
+            background-color: #fff;
+            user-select: none;
+        }
+
+        .button:active {
+            background-color: #3498db;
+            color: #fff;
+        }
+        .buttonr:active {
+            background-color: #FF5733;
+            color: #fff;
+        }
+        .buttong:active {
+            background-color: #52BE80;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="ipAddressContainer">
+            <label for="ipAddress">IP Address:</label>
+            <input type="text" id="ipAddress" placeholder="Enter IP Address">
+        </div>
+        <div id="controls-container">
+			<button class="buttonr" onclick="sendCommand('R')">R</button>
+			<button class="buttonw" ></button>       
+            <button class="buttong" onclick="sendCommand('G')">G</button>
+            <br>
+           
+            <button class="button" onclick="sendCommand('1')">1</button>
+            <button class="button" onclick="sendCommand('2')">2</button>
+            <button class="button" onclick="sendCommand('3')">3</button>
+            <br>
+            <button class="button" onclick="sendCommand('4')">4</button>
+            <button class="button" onclick="sendCommand('5')">5</button>
+            <button class="button" onclick="sendCommand('6')">6</button>
+            
+            <br>
+            <button class="button" onclick="sendCommand('7')">7</button>
+            <button class="button" onclick="sendCommand('8')">8</button>
+            <button class="button" onclick="sendCommand('9')">9</button>
+             <br>
+           
+            <button class="button" onclick="sendCommand('A')">A</button>
+             <button class="button" onclick="sendCommand('0')">0</button>
+            <button class="button" onclick="sendCommand('B')">B</button>
+            <br>
+            
+        </div>
+    </div>
+    <script>
+        function sendCommand(command) {
+            var ipAddress = document.getElementById('ipAddress').value;
+            var url = 'http://' + ipAddress + ':42001/broadcast=+' + command;
+
+            fetch(url, { mode: 'no-cors' });
+        }
+
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('mousedown', function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+
+</html>
